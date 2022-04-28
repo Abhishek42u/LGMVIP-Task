@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>My To Do List</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    
+    <style>
+        
+*{
+    font-family: "Comfortaa";
+    color: #333c3e;
+}
+
+#inp, #clip{
+    background-color: white;
+    border: 2px ridge #c9c9bd;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+h2{
+    margin-top: 0px;
+}
+
+#container{
+    width: 300px;
+    background-color: #f0efee;
+    text-align: center;
+    border: 2px ridge #c9c9bd;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+input[value='✖']{
+    //margin-top: px;
+    background-color: white;
+    border: 2px ridge #c9c9bd;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+.item{
+    padding: 10px;
+    line-height: 24px;
+    border-radius: 2px;
+    margin-bottom: 7px;
+}
+
+#list{
+    width: 210px;
+    word-break: break-all;
+    text-align: left;
+}
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    
+</head>
+<body>
+
+    <center><div id="container">
+        <h2>My To-Do List</h2>
+        <input type="text" id="inp" autofocus="true">
+        <input type="button" id="clip" value="Insert">
+        <ol id="list"></ol>
+    </div></center>
+    
+    <script>
+
+
+$(document).ready(function () {
+
+    var clip = $("#clip");
+    var list = $("#list");
+    var cal = 1;
+
+    clip.click(function () {
+
+        var inp = $("#inp").val();
+        
+        if (inp != "") {
+
+            if (cal == 1) {
+                list.append("<li class='item'><span>" + inp + "</span><br><input type='button' value='✖'></li>");
+                        cal = 2;
+            }
+
+            else if (cal == 2) {
+                list.append("<li class='item'><span>" + inp + "</span><br><input type='button' value='✖'></li>");
+                        cal = 1;
+            }
+                    
+            $("#inp").val("");
+
+            $("input[value='✖']").on("click", function () {
+                $(this).parent().remove();
+                $(".item:even").css("background-color", "white");
+                $(".item:odd").css("background-color", "#f0efee");
+                $(".item:even > input").css({"background-color" : "white", "border-width" : "0px"});
+                $(".item:odd > input").css({"background-color" : "#f0efee", "border-width" : "0px"});
+            })
+            $(".item:even").css("background-color", "white");
+            $(".item:odd").css("background-color", "#f0efee");
+            $(".item:even > input").css({"background-color" : "white", "border-width" : "0px"});
+            $(".item:odd > input").css({"background-color" : "#f0efee", "border-width" : "0px"});
+        }
+    })
+})
+
+    </script>
+    
+</body>
+</html>
